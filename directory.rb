@@ -28,6 +28,7 @@ def print(students, letter = nil)
   else
     students
   end
+  printed_students.select! { |s| s[:name].length < 12 }
   printed_students.each_with_index do |student, index|
     puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
