@@ -22,8 +22,13 @@ def print_header
   puts "--------------------------------"
 end
 
-def print(students)
-  students.each_with_index do |student, index|
+def print(students, letter = nil)
+  printed_students = if letter && !letter.empty?
+    students.select { |s| s[:name][0].downcase == letter.downcase }
+  else
+    students
+  end
+  printed_students.each_with_index do |student, index|
     puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
@@ -32,8 +37,13 @@ def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
 
+def input_initial
+  puts 'Find a student by their first initial'
+  gets.chomp
+end
+
 students = input_students
 #nothing happens until we call the methods
 print_header
-print(students)
+print(students, input_initial)
 print_footer(students)
