@@ -22,17 +22,24 @@ def print_header
   puts "--------------------------------"
 end
 
+def student_str(student, index)
+  index = ((index + 1).to_s + '.').center(4)
+  name = student[:name].center(30)
+  cohort = student[:cohort].to_s.center(10)
+  "#{index} #{name} (#{cohort} cohort)"
+end
+
 def print(students, letter = nil)
   printed_students = if letter && !letter.empty?
     students.select { |s| s[:name][0].downcase == letter.downcase }
   else
     students
   end
-  printed_students.select! { |s| s[:name].length < 12 }
+  # printed_students.select! { |s| s[:name].length < 12 }
   index = 0
   while index < printed_students.length
     student = printed_students[index]
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    puts student_str(student, index)
     index += 1
   end
 end
